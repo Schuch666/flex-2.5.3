@@ -1,0 +1,35 @@
+	cc -c -I. -I. -g ccl.c
+	cc -c -I. -I. -g dfa.c
+	cc -c -I. -I. -g ecs.c
+	cc -c -I. -I. -g gen.c
+	cc -c -I. -I. -g main.c
+	cc -c -I. -I. -g misc.c
+	cc -c -I. -I. -g nfa.c
+	yacc -d ./parse.y
+	cc -c -I. -I. -g parse.c
+	cc -c -I. -I. -g scan.c
+	cc -c -I. -I. -g skel.c
+	cc -c -I. -I. -g sym.c
+	cc -c -I. -I. -g tblcmp.c
+	cc -c -I. -I. -g yylex.c
+	cc -c -I. -I. -g libmain.c
+	cc -c -I. -I. -g libyywrap.c
+	ar cru libfl.a libmain.o libyywrap.o
+	ranlib libfl.a
+	cc -g -o flex  ccl.o dfa.o ecs.o gen.o main.o misc.o nfa.o parse.o  scan.o skel.o sym.o tblcmp.o yylex.o  libfl.a 
+	/bin/sh ./mkinstalldirs \
+	  /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/bin /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/lib /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/include /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/man/man1
+mkdir /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/bin
+mkdir /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/lib
+mkdir /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/include
+mkdir /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/man
+mkdir /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/man/man1
+	rm -f /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/man/man1/flexdoc.1
+	./install.sh -c -m 644 ./flex.1 /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/man/man1/flex.1
+	./install.sh -c flex /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/bin/flex
+	cd /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/bin && ln -s flex flex++
+	./install.sh -c -m 644 libfl.a /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/lib/libfl.a
+	cd /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/lib && ranlib libfl.a
+ranlib-702 ranlib: INFO 
+  The optimized archive is up-to-date.
+	./install.sh -c -m 644 ./FlexLexer.h /fs/scd/home1/ncargd/test/local/src/flex-2.5.3/include/FlexLexer.h
